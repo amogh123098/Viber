@@ -1,0 +1,28 @@
+{% extends 'music/base.html' %}
+
+{% block title %}{{ song }}{% endblock %}
+{% block albums_active %}active{% endblock %}
+{% load staticfiles %}
+
+{{% block body %}
+
+<div class="container-fluid ">
+    <div class="row col-md-8 col-md-offset-2 col-xs-12">
+        <audio controls
+
+                  data-info-album-art="{% if song.album.album_logo %}{{ album.album_logo.url }}{% else %}{% static 'images/mus.png' %}{% endif %}"
+                  data-info-album-title="{{ song.album.album_title }}"
+                  data-info-artist="{{ song.album.artist }}"
+                  data-info-title="{{ song.song_title }}">
+
+
+
+                  <source src="{{ song.file.url }}" type="audio/mpeg" />
+                  <a href="{{ song.file.url }}">{{ song.song_title }}</a>
+                  An html5-capable browser is required to play this audio.
+        </audio>
+    </div>
+    <script src="{% static 'music/js/bootstrap3_player1.js' %}?1"></script>
+</div>
+
+{% endblock %}
